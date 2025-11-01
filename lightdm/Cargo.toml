@@ -1,0 +1,43 @@
+[package]
+name = "lightdm"
+description = "Rust bindings for liblightdm-gobject-1"
+
+[package.edition]
+workspace = true
+
+[package.version]
+workspace = true
+
+[package.authors]
+workspace = true
+
+[package.categories]
+workspace = true
+
+[package.repository]
+workspace = true
+
+[package.license]
+workspace = true
+
+[package.keywords]
+workspace = true
+
+[package.exclude]
+workspace = true
+
+[package.metadata.docs.rs]
+all-features = true
+# For build.rs scripts
+rustc-args = ["--cfg", "docsrs"]
+# For rustdoc
+rustdoc-args = ["--cfg", "docsrs"]
+
+[dependencies]
+libc = "0.2"
+ffi = { package = "lightdm-sys", path = "sys" }
+glib.workspace = true
+gio.workspace = true
+
+[features]
+v1_11_1 = ["ffi/v1_11_1"]

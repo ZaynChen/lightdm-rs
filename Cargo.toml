@@ -1,0 +1,27 @@
+[workspace]
+resolver = "3"
+members = ["lightdm", "lightdm/sys"]
+
+exclude = ["gir"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+authors = ["Zayn Chen <zaynchen@qq.com>"]
+categories = ["api-bindings"]
+repository = "https://github.com/zaynchen/lightdm-rs"
+license = "GPL-3.0"
+keywords = ["lightdm"]
+exclude = ["gir-files/*", "lightdm-gir-files"]
+
+[workspace.dependencies]
+gobject-sys = { version = "0.21" }
+glib-sys = { version = "0.21" }
+glib = { version = "0.21" }
+gio-sys = { version = "0.21" }
+gio = { version = "0.21" }
+# gobject-sys = { git = "https://github.com/gtk-rs/gtk-rs-core.git", branch = "main", version = "0.22" }
+# glib-sys = { git = "https://github.com/gtk-rs/gtk-rs-core.git", branch = "main", version = "0.22" }
+# glib = { git = "https://github.com/gtk-rs/gtk-rs-core.git", branch = "main", version = "0.22" }
+# gio-sys = { git = "https://github.com/gtk-rs/gtk-rs-core.git", branch = "main", version = "0.22" }
+# gio = { git = "https://github.com/gtk-rs/gtk-rs-core.git", branch = "main", version = "0.22" }

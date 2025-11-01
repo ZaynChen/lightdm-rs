@@ -1,0 +1,87 @@
+[options]
+library = "LightDM"
+version = "1"
+min_cfg_version = "1"
+target_path = "."
+girs_directories = ["../lightdm-gir-files"]
+work_mode = "normal"
+single_version_file = true
+generate_safety_asserts = true
+deprecate_by_min_version = true
+use_gi_docgen = false
+generate_builder = true
+
+generate = [
+  "LightDM.MessageType",
+  "LightDM.PromptType",
+  "LightDM.GreeterError",
+  "LightDM.Language",
+  "LightDM.Layout",
+  "LightDM.Session",
+  "LightDM.User",
+  "LightDM.UserList",
+  "LightDM.*",
+]
+
+manual = [
+  "GLib.Error",
+  "Gio.AsyncResult",
+  "Gio.Cancellable",
+  "Gio.AsyncReadyCallback",
+]
+
+[[object]]
+name = "LightDM.Greeter"
+status = "generate"
+manual_traits = ["GreeterExtManual"]
+[[object.function]]
+name = "authenticate"
+manual = true
+[[object.function]]
+name = "authenticate_as_guest"
+manual = true
+[[object.function]]
+name = "authenticate_autologin"
+manual = true
+[[object.function]]
+name = "authenticate_remote"
+manual = true
+[[object.function]]
+name = "cancel_authentication"
+manual = true
+[[object.function]]
+name = "connect_sync"
+manual = true
+[[object.function]]
+name = "connect_to_daemon"
+manual = true
+[[object.function]]
+name = "connect_to_daemon_future"
+manual = true
+[[object.function]]
+name = "connect_to_daemon_sync"
+manual = true
+[[object.function]]
+name = "ensure_shared_data_dir"
+manual = true
+[[object.function]]
+name = "ensure_shared_data_dir_futur"
+manual = true
+[[object.function]]
+name = "ensure_shared_data_dir_sync"
+manual = true
+[[object.function]]
+name = "respond"
+manual = true
+[[object.function]]
+name = "set_language"
+manual = true
+[[object.function]]
+name = "start_session"
+manual = true
+[[object.function]]
+name = "start_session_future"
+manual = true
+[[object.function]]
+name = "start_session_sync"
+manual = true
