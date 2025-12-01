@@ -10,7 +10,7 @@ edition = "2024"
 authors = ["Zayn Chen <zaynchen@qq.com>"]
 categories = ["api-bindings"]
 repository = "https://github.com/zaynchen/lightdm-rs"
-license = "GPL-3.0"
+license = "MIT"
 keywords = ["lightdm"]
 exclude = ["gir-files/*", "lightdm-gir-files"]
 
