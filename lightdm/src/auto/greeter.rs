@@ -13,7 +13,7 @@ use glib::{
 use std::boxed::Box as Box_;
 
 glib::wrapper! {
-    /// [`Greeter`][crate::Greeter] is an opaque data structure and can only be accessed
+    /// #LightDMGreeter is an opaque data structure and can only be accessed
     /// using the provided functions.
     ///
     /// ## Properties
@@ -85,7 +85,7 @@ glib::wrapper! {
     ///  The ::authentication-complete signal gets emitted when the greeter
     /// has completed authentication.
     ///
-    /// Call [`GreeterExt::is_authenticated()`][crate::prelude::GreeterExt::is_authenticated()] to check if the authentication
+    /// Call lightdm_greeter_get_is_authenticated() to check if the authentication
     /// was successful.
     ///
     ///
@@ -93,7 +93,7 @@ glib::wrapper! {
     ///
     /// #### `autologin-timer-expired`
     ///  The ::timed-login signal gets emitted when the automatic login timer has expired.
-    /// The application should then call [`GreeterExtManual::authenticate_autologin()`][crate::prelude::GreeterExtManual::authenticate_autologin()].
+    /// The application should then call lightdm_greeter_authenticate_autologin().
     ///
     ///
     ///
@@ -103,7 +103,7 @@ glib::wrapper! {
     /// greeter is no longer needed.
     ///
     /// This signal only matters if the greeter has marked itself as
-    /// resettable using [`GreeterExt::set_resettable()`][crate::prelude::GreeterExt::set_resettable()].
+    /// resettable using lightdm_greeter_set_resettable().
     ///
     ///
     ///
@@ -113,7 +113,7 @@ glib::wrapper! {
     /// that was previously marked idle.
     ///
     /// This signal only matters if the greeter has marked itself as
-    /// resettable using [`GreeterExt::set_resettable()`][crate::prelude::GreeterExt::set_resettable()].
+    /// resettable using lightdm_greeter_set_resettable().
     ///
     ///
     ///
@@ -127,11 +127,11 @@ glib::wrapper! {
     ///
     /// #### `show-prompt`
     ///  The ::show-prompt signal gets emitted when the greeter should show a
-    /// prompt to the user. The given text should be displayed and an input
+    /// prompt to the user.  The given text should be displayed and an input
     /// field for the user to provide a response.
     ///
-    /// Call [`GreeterExtManual::respond()`][crate::prelude::GreeterExtManual::respond()] with the resultant input or
-    /// [`GreeterExtManual::cancel_authentication()`][crate::prelude::GreeterExtManual::cancel_authentication()] to abort the authentication.
+    /// Call lightdm_greeter_respond() with the resultant input or
+    /// lightdm_greeter_cancel_authentication() to abort the authentication.
     ///
     ///
     ///
@@ -153,7 +153,7 @@ impl Greeter {
     ///
     /// # Returns
     ///
-    /// the new [`Greeter`][crate::Greeter]
+    /// the new #LightDMGreeter
     #[doc(alias = "lightdm_greeter_new")]
     pub fn new() -> Greeter {
         assert_initialized_main_thread!();
@@ -185,7 +185,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
     ///
     /// # Returns
     ///
-    /// The username of the authentication user being authenticated or [`None`] if no authentication in progress.
+    /// The username of the authentication user being authenticated or #NULL if no authentication in progress.
     #[doc(alias = "lightdm_greeter_get_authentication_user")]
     #[doc(alias = "get_authentication_user")]
     #[doc(alias = "authentication-user")]
@@ -201,7 +201,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
     ///
     /// # Returns
     ///
-    /// [`true`] if the guest account should be automatically logged into.
+    /// #TRUE if the guest account should be automatically logged into.
     #[doc(alias = "lightdm_greeter_get_autologin_guest_hint")]
     #[doc(alias = "get_autologin_guest_hint")]
     #[doc(alias = "autologin-guest-hint")]
@@ -277,7 +277,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
     ///
     /// # Returns
     ///
-    /// [`true`] if guest sessions are supported.
+    /// #TRUE if guest sessions are supported.
     #[doc(alias = "lightdm_greeter_get_has_guest_account_hint")]
     #[doc(alias = "get_has_guest_account_hint")]
     #[doc(alias = "has-guest-account-hint")]
@@ -289,9 +289,9 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// Check if user accounts should be shown. If this is TRUE then the list of
-    /// accounts should be taken from [`UserList`][crate::UserList] and displayed in the greeter
-    /// for the user to choose from. Note that this list can be empty and it is
+    /// Check if user accounts should be shown.  If this is TRUE then the list of
+    /// accounts should be taken from #LightDMUserList and displayed in the greeter
+    /// for the user to choose from.  Note that this list can be empty and it is
     /// recommended you show a method for the user to enter a username manually.
     ///
     /// If this option is shown the greeter should only allow these users to be
@@ -299,7 +299,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
     ///
     /// # Returns
     ///
-    /// [`true`] if the available users should not be shown.
+    /// #TRUE if the available users should not be shown.
     #[doc(alias = "lightdm_greeter_get_hide_users_hint")]
     #[doc(alias = "get_hide_users_hint")]
     #[doc(alias = "hide-users-hint")]
@@ -317,7 +317,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
     ///
     /// # Returns
     ///
-    /// The value for this hint or [`None`] if not set.
+    /// The value for this hint or #NULL if not set.
     #[doc(alias = "lightdm_greeter_get_hint")]
     #[doc(alias = "get_hint")]
     fn hint(&self, name: &str) -> Option<glib::GString> {
@@ -333,7 +333,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
     ///
     /// # Returns
     ///
-    /// [`true`] if the greeter is authenticating a user.
+    /// #TRUE if the greeter is authenticating a user.
     #[doc(alias = "lightdm_greeter_get_in_authentication")]
     #[doc(alias = "get_in_authentication")]
     #[doc(alias = "in-authentication")]
@@ -349,7 +349,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
     ///
     /// # Returns
     ///
-    /// [`true`] if the greeter is authenticated for login.
+    /// #TRUE if the greeter is authenticated for login.
     #[doc(alias = "lightdm_greeter_get_is_authenticated")]
     #[doc(alias = "get_is_authenticated")]
     #[doc(alias = "is-authenticated")]
@@ -365,7 +365,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
     ///
     /// # Returns
     ///
-    /// [`true`] if the greeter was triggered by locking the seat.
+    /// #TRUE if the greeter was triggered by locking the seat.
     #[doc(alias = "lightdm_greeter_get_lock_hint")]
     #[doc(alias = "get_lock_hint")]
     #[doc(alias = "lock-hint")]
@@ -381,7 +381,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
     ///
     /// # Returns
     ///
-    /// [`true`] if the guest account should be selected by default.
+    /// #TRUE if the guest account should be selected by default.
     #[doc(alias = "lightdm_greeter_get_select_guest_hint")]
     #[doc(alias = "get_select_guest_hint")]
     #[doc(alias = "select-guest-hint")]
@@ -409,14 +409,14 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// Check if a manual login option should be shown. If set the GUI
+    /// Check if a manual login option should be shown.  If set the GUI
     /// should provide a way for a username to be entered manually.
     /// Without this hint a greeter which is showing a user list can
     /// limit logins to only those users.
     ///
     /// # Returns
     ///
-    /// [`true`] if a manual login option should be shown.
+    /// #TRUE if a manual login option should be shown.
     #[doc(alias = "lightdm_greeter_get_show_manual_login_hint")]
     #[doc(alias = "get_show_manual_login_hint")]
     #[doc(alias = "show-manual-login-hint")]
@@ -428,12 +428,12 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// Check if a remote login option should be shown. If set the GUI
+    /// Check if a remote login option should be shown.  If set the GUI
     /// should provide a way for a user to log into a remote desktop server.
     ///
     /// # Returns
     ///
-    /// [`true`] if a remote login option should be shown.
+    /// #TRUE if a remote login option should be shown.
     #[doc(alias = "lightdm_greeter_get_show_remote_login_hint")]
     #[doc(alias = "get_show_remote_login_hint")]
     #[doc(alias = "show-remote-login-hint")]
@@ -462,7 +462,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
     /// The ::authentication-complete signal gets emitted when the greeter
     /// has completed authentication.
     ///
-    /// Call [`is_authenticated()`][Self::is_authenticated()] to check if the authentication
+    /// Call lightdm_greeter_get_is_authenticated() to check if the authentication
     /// was successful.
     #[doc(alias = "authentication-complete")]
     fn connect_authentication_complete<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
@@ -482,7 +482,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"authentication-complete".as_ptr() as *const _,
+                c"authentication-complete".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     authentication_complete_trampoline::<Self, F> as *const (),
                 )),
@@ -492,7 +492,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
     }
 
     /// The ::timed-login signal gets emitted when the automatic login timer has expired.
-    /// The application should then call [`GreeterExtManual::authenticate_autologin()`][crate::prelude::GreeterExtManual::authenticate_autologin()].
+    /// The application should then call lightdm_greeter_authenticate_autologin().
     #[doc(alias = "autologin-timer-expired")]
     fn connect_autologin_timer_expired<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe extern "C" fn autologin_timer_expired_trampoline<
@@ -511,7 +511,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"autologin-timer-expired".as_ptr() as *const _,
+                c"autologin-timer-expired".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     autologin_timer_expired_trampoline::<Self, F> as *const (),
                 )),
@@ -524,7 +524,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
     /// greeter is no longer needed.
     ///
     /// This signal only matters if the greeter has marked itself as
-    /// resettable using [`set_resettable()`][Self::set_resettable()].
+    /// resettable using lightdm_greeter_set_resettable().
     #[doc(alias = "idle")]
     fn connect_idle<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe extern "C" fn idle_trampoline<P: IsA<Greeter>, F: Fn(&P) + 'static>(
@@ -540,7 +540,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"idle".as_ptr() as *const _,
+                c"idle".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     idle_trampoline::<Self, F> as *const (),
                 )),
@@ -553,7 +553,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
     /// that was previously marked idle.
     ///
     /// This signal only matters if the greeter has marked itself as
-    /// resettable using [`set_resettable()`][Self::set_resettable()].
+    /// resettable using lightdm_greeter_set_resettable().
     #[doc(alias = "reset")]
     fn connect_reset<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe extern "C" fn reset_trampoline<P: IsA<Greeter>, F: Fn(&P) + 'static>(
@@ -569,7 +569,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"reset".as_ptr() as *const _,
+                c"reset".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     reset_trampoline::<Self, F> as *const (),
                 )),
@@ -611,7 +611,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"show-message".as_ptr() as *const _,
+                c"show-message".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     show_message_trampoline::<Self, F> as *const (),
                 )),
@@ -621,11 +621,11 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
     }
 
     /// The ::show-prompt signal gets emitted when the greeter should show a
-    /// prompt to the user. The given text should be displayed and an input
+    /// prompt to the user.  The given text should be displayed and an input
     /// field for the user to provide a response.
     ///
-    /// Call [`GreeterExtManual::respond()`][crate::prelude::GreeterExtManual::respond()] with the resultant input or
-    /// [`GreeterExtManual::cancel_authentication()`][crate::prelude::GreeterExtManual::cancel_authentication()] to abort the authentication.
+    /// Call lightdm_greeter_respond() with the resultant input or
+    /// lightdm_greeter_cancel_authentication() to abort the authentication.
     /// ## `text`
     /// Prompt text
     /// ## `type_`
@@ -657,7 +657,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"show-prompt".as_ptr() as *const _,
+                c"show-prompt".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     show_prompt_trampoline::<Self, F> as *const (),
                 )),
@@ -685,7 +685,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::authentication-user".as_ptr() as *const _,
+                c"notify::authentication-user".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_authentication_user_trampoline::<Self, F> as *const (),
                 )),
@@ -713,7 +713,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::autologin-guest-hint".as_ptr() as *const _,
+                c"notify::autologin-guest-hint".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_autologin_guest_hint_trampoline::<Self, F> as *const (),
                 )),
@@ -744,7 +744,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::autologin-session-hint".as_ptr() as *const _,
+                c"notify::autologin-session-hint".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_autologin_session_hint_trampoline::<Self, F> as *const (),
                 )),
@@ -775,7 +775,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::autologin-timeout-hint".as_ptr() as *const _,
+                c"notify::autologin-timeout-hint".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_autologin_timeout_hint_trampoline::<Self, F> as *const (),
                 )),
@@ -803,7 +803,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::autologin-user-hint".as_ptr() as *const _,
+                c"notify::autologin-user-hint".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_autologin_user_hint_trampoline::<Self, F> as *const (),
                 )),
@@ -831,7 +831,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::default-session-hint".as_ptr() as *const _,
+                c"notify::default-session-hint".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_default_session_hint_trampoline::<Self, F> as *const (),
                 )),
@@ -862,7 +862,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::has-guest-account-hint".as_ptr() as *const _,
+                c"notify::has-guest-account-hint".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_has_guest_account_hint_trampoline::<Self, F> as *const (),
                 )),
@@ -890,7 +890,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::hide-users-hint".as_ptr() as *const _,
+                c"notify::hide-users-hint".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_hide_users_hint_trampoline::<Self, F> as *const (),
                 )),
@@ -918,7 +918,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::in-authentication".as_ptr() as *const _,
+                c"notify::in-authentication".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_in_authentication_trampoline::<Self, F> as *const (),
                 )),
@@ -946,7 +946,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::is-authenticated".as_ptr() as *const _,
+                c"notify::is-authenticated".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_is_authenticated_trampoline::<Self, F> as *const (),
                 )),
@@ -971,7 +971,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::lock-hint".as_ptr() as *const _,
+                c"notify::lock-hint".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_lock_hint_trampoline::<Self, F> as *const (),
                 )),
@@ -999,7 +999,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::select-guest-hint".as_ptr() as *const _,
+                c"notify::select-guest-hint".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_select_guest_hint_trampoline::<Self, F> as *const (),
                 )),
@@ -1027,7 +1027,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::select-user-hint".as_ptr() as *const _,
+                c"notify::select-user-hint".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_select_user_hint_trampoline::<Self, F> as *const (),
                 )),
@@ -1058,7 +1058,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::show-manual-login-hint".as_ptr() as *const _,
+                c"notify::show-manual-login-hint".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_show_manual_login_hint_trampoline::<Self, F> as *const (),
                 )),
@@ -1089,7 +1089,7 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::show-remote-login-hint".as_ptr() as *const _,
+                c"notify::show-remote-login-hint".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_show_remote_login_hint_trampoline::<Self, F> as *const (),
                 )),

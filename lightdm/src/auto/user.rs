@@ -12,7 +12,7 @@ use glib::{
 use std::boxed::Box as Box_;
 
 glib::wrapper! {
-    /// [`User`][crate::User] is an opaque data structure and can only be accessed
+    /// #LightDMUser is an opaque data structure and can only be accessed
     /// using the provided functions.
     ///
     /// ## Properties
@@ -106,7 +106,7 @@ pub trait UserExt: IsA<User> + 'static {
     ///
     /// # Returns
     ///
-    /// The background file path for the given user or [`None`] if no path
+    /// The background file path for the given user or #NULL if no path
     #[doc(alias = "lightdm_user_get_background")]
     #[doc(alias = "get_background")]
     fn background(&self) -> Option<glib::GString> {
@@ -137,7 +137,7 @@ pub trait UserExt: IsA<User> + 'static {
     ///
     /// # Returns
     ///
-    /// [`true`] if the user has waiting messages.
+    /// #TRUE if the user has waiting messages.
     #[doc(alias = "lightdm_user_get_has_messages")]
     #[doc(alias = "get_has_messages")]
     #[doc(alias = "has-messages")]
@@ -169,7 +169,7 @@ pub trait UserExt: IsA<User> + 'static {
     ///
     /// # Returns
     ///
-    /// The image URI for the given user or [`None`] if no URI
+    /// The image URI for the given user or #NULL if no URI
     #[doc(alias = "lightdm_user_get_image")]
     #[doc(alias = "get_image")]
     fn image(&self) -> Option<glib::GString> {
@@ -196,7 +196,7 @@ pub trait UserExt: IsA<User> + 'static {
     ///
     /// # Returns
     ///
-    /// The language in the form of a local specification (e.g. "de_DE.UTF-8") for the given user or [`None`] if using the system default locale.
+    /// The language in the form of a local specification (e.g. "de_DE.UTF-8") for the given user or #NULL if using the system default locale.
     #[doc(alias = "lightdm_user_get_language")]
     #[doc(alias = "get_language")]
     fn language(&self) -> Option<glib::GString> {
@@ -211,7 +211,7 @@ pub trait UserExt: IsA<User> + 'static {
     ///
     /// # Returns
     ///
-    /// The keyboard layout for the given user or [`None`] if using system defaults. Copy the value if you want to use it long term.
+    /// The keyboard layout for the given user or #NULL if using system defaults.  Copy the value if you want to use it long term.
     #[doc(alias = "lightdm_user_get_layout")]
     #[doc(alias = "get_layout")]
     fn layout(&self) -> Option<glib::GString> {
@@ -222,7 +222,7 @@ pub trait UserExt: IsA<User> + 'static {
     ///
     /// # Returns
     ///
-    /// A NULL-terminated array of keyboard layouts for the given user. Copy the values if you want to use them long term.
+    /// A NULL-terminated array of keyboard layouts for the given user.  Copy the values if you want to use them long term.
     #[doc(alias = "lightdm_user_get_layouts")]
     #[doc(alias = "get_layouts")]
     fn layouts(&self) -> Vec<glib::GString> {
@@ -237,7 +237,7 @@ pub trait UserExt: IsA<User> + 'static {
     ///
     /// # Returns
     ///
-    /// [`true`] if the user is currently logged in.
+    /// #TRUE if the user is currently logged in.
     #[doc(alias = "lightdm_user_get_logged_in")]
     #[doc(alias = "get_logged_in")]
     #[doc(alias = "logged-in")]
@@ -280,7 +280,7 @@ pub trait UserExt: IsA<User> + 'static {
     ///
     /// # Returns
     ///
-    /// The session for the given user or [`None`] if using system defaults.
+    /// The session for the given user or #NULL if using system defaults.
     #[doc(alias = "lightdm_user_get_session")]
     #[doc(alias = "get_session")]
     fn session(&self) -> Option<glib::GString> {
@@ -318,7 +318,7 @@ pub trait UserExt: IsA<User> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"changed".as_ptr() as *const _,
+                c"changed".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     changed_trampoline::<Self, F> as *const (),
                 )),
@@ -343,7 +343,7 @@ pub trait UserExt: IsA<User> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::background".as_ptr() as *const _,
+                c"notify::background".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_background_trampoline::<Self, F> as *const (),
                 )),
@@ -368,7 +368,7 @@ pub trait UserExt: IsA<User> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::display-name".as_ptr() as *const _,
+                c"notify::display-name".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_display_name_trampoline::<Self, F> as *const (),
                 )),
@@ -393,7 +393,7 @@ pub trait UserExt: IsA<User> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::has-messages".as_ptr() as *const _,
+                c"notify::has-messages".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_has_messages_trampoline::<Self, F> as *const (),
                 )),
@@ -418,7 +418,7 @@ pub trait UserExt: IsA<User> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::home-directory".as_ptr() as *const _,
+                c"notify::home-directory".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_home_directory_trampoline::<Self, F> as *const (),
                 )),
@@ -443,7 +443,7 @@ pub trait UserExt: IsA<User> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::image".as_ptr() as *const _,
+                c"notify::image".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_image_trampoline::<Self, F> as *const (),
                 )),
@@ -468,7 +468,7 @@ pub trait UserExt: IsA<User> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::is-locked".as_ptr() as *const _,
+                c"notify::is-locked".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_is_locked_trampoline::<Self, F> as *const (),
                 )),
@@ -493,7 +493,7 @@ pub trait UserExt: IsA<User> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::language".as_ptr() as *const _,
+                c"notify::language".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_language_trampoline::<Self, F> as *const (),
                 )),
@@ -518,7 +518,7 @@ pub trait UserExt: IsA<User> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::layout".as_ptr() as *const _,
+                c"notify::layout".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_layout_trampoline::<Self, F> as *const (),
                 )),
@@ -543,7 +543,7 @@ pub trait UserExt: IsA<User> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::layouts".as_ptr() as *const _,
+                c"notify::layouts".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_layouts_trampoline::<Self, F> as *const (),
                 )),
@@ -568,7 +568,7 @@ pub trait UserExt: IsA<User> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::logged-in".as_ptr() as *const _,
+                c"notify::logged-in".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_logged_in_trampoline::<Self, F> as *const (),
                 )),
@@ -593,7 +593,7 @@ pub trait UserExt: IsA<User> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::name".as_ptr() as *const _,
+                c"notify::name".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_name_trampoline::<Self, F> as *const (),
                 )),
@@ -618,7 +618,7 @@ pub trait UserExt: IsA<User> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::real-name".as_ptr() as *const _,
+                c"notify::real-name".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_real_name_trampoline::<Self, F> as *const (),
                 )),
@@ -643,7 +643,7 @@ pub trait UserExt: IsA<User> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::session".as_ptr() as *const _,
+                c"notify::session".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_session_trampoline::<Self, F> as *const (),
                 )),
@@ -668,7 +668,7 @@ pub trait UserExt: IsA<User> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::uid".as_ptr() as *const _,
+                c"notify::uid".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_uid_trampoline::<Self, F> as *const (),
                 )),

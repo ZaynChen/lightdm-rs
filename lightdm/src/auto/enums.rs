@@ -245,10 +245,10 @@ impl From<MessageType> for glib::Value {
 #[non_exhaustive]
 #[doc(alias = "LightDMPromptType")]
 pub enum PromptType {
-    /// prompt is a question. The information can be shown as it is entered.
+    /// prompt is a question.  The information can be shown as it is entered.
     #[doc(alias = "LIGHTDM_PROMPT_TYPE_QUESTION")]
     Question,
-    /// prompt is for secret information. The entered information should be obscured so it can't be publically visible.
+    /// prompt is for secret information.  The entered information should be obscured so it can't be publically visible.
     #[doc(alias = "LIGHTDM_PROMPT_TYPE_SECRET")]
     Secret,
     #[doc(hidden)]

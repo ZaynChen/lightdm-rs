@@ -11,7 +11,7 @@ use glib::{
 use std::boxed::Box as Box_;
 
 glib::wrapper! {
-    /// [`Language`][crate::Language] is an opaque data structure and can only be accessed
+    /// #LightDMLanguage is an opaque data structure and can only be accessed
     /// using the provided functions.
     ///
     /// ## Properties
@@ -139,7 +139,7 @@ pub trait LanguageExt: IsA<Language> + 'static {
     ///
     /// # Returns
     ///
-    /// [`true`] if the code matches this language.
+    /// #TRUE if the code matches this language.
     #[doc(alias = "lightdm_language_matches")]
     fn matches(&self, code: &str) -> bool {
         unsafe {
@@ -166,7 +166,7 @@ pub trait LanguageExt: IsA<Language> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::name".as_ptr() as *const _,
+                c"notify::name".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_name_trampoline::<Self, F> as *const (),
                 )),
@@ -191,7 +191,7 @@ pub trait LanguageExt: IsA<Language> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::territory".as_ptr() as *const _,
+                c"notify::territory".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_territory_trampoline::<Self, F> as *const (),
                 )),

@@ -12,7 +12,7 @@ use glib::{
 use std::boxed::Box as Box_;
 
 glib::wrapper! {
-    /// [`UserList`][crate::UserList] is an opaque data structure and can only be accessed
+    /// #LightDMUserList is an opaque data structure and can only be accessed
     /// using the provided functions.
     ///
     /// ## Properties
@@ -63,7 +63,7 @@ impl UserList {
     ///
     /// # Returns
     ///
-    /// the [`UserList`][crate::UserList]
+    /// the #LightDMUserList
     #[doc(alias = "lightdm_user_list_get_instance")]
     #[doc(alias = "get_instance")]
     pub fn instance() -> Option<UserList> {
@@ -88,13 +88,13 @@ pub trait UserListExt: IsA<UserList> + 'static {
         unsafe { ffi::lightdm_user_list_get_length(self.as_ref().to_glib_none().0) }
     }
 
-    /// Get information about a given user or [`None`] if this user doesn't exist.
+    /// Get information about a given user or #NULL if this user doesn't exist.
     /// ## `username`
     /// Name of user to get.
     ///
     /// # Returns
     ///
-    /// A [`User`][crate::User] entry for the given user.
+    /// A #LightDMUser entry for the given user.
     #[doc(alias = "lightdm_user_list_get_user_by_name")]
     #[doc(alias = "get_user_by_name")]
     fn user_by_name(&self, username: &str) -> Option<User> {
@@ -106,12 +106,12 @@ pub trait UserListExt: IsA<UserList> + 'static {
         }
     }
 
-    /// Get a list of users to present to the user. This list may be a subset of the
+    /// Get a list of users to present to the user.  This list may be a subset of the
     /// available users and may be empty depending on the server configuration.
     ///
     /// # Returns
     ///
-    /// A list of [`User`][crate::User] that should be presented to the user.
+    /// A list of #LightDMUser that should be presented to the user.
     #[doc(alias = "lightdm_user_list_get_users")]
     #[doc(alias = "get_users")]
     fn users(&self) -> Vec<User> {
@@ -129,7 +129,7 @@ pub trait UserListExt: IsA<UserList> + 'static {
 
     /// The ::user-added signal gets emitted when a user account is created.
     /// ## `user`
-    /// The [`User`][crate::User] that has been added.
+    /// The #LightDMUser that has been added.
     #[doc(alias = "user-added")]
     fn connect_user_added<F: Fn(&Self, &User) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe extern "C" fn user_added_trampoline<P: IsA<UserList>, F: Fn(&P, &User) + 'static>(
@@ -149,7 +149,7 @@ pub trait UserListExt: IsA<UserList> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"user-added".as_ptr() as *const _,
+                c"user-added".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     user_added_trampoline::<Self, F> as *const (),
                 )),
@@ -160,7 +160,7 @@ pub trait UserListExt: IsA<UserList> + 'static {
 
     /// The ::user-changed signal gets emitted when a user account is modified.
     /// ## `user`
-    /// The [`User`][crate::User] that has been changed.
+    /// The #LightDMUser that has been changed.
     #[doc(alias = "user-changed")]
     fn connect_user_changed<F: Fn(&Self, &User) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe extern "C" fn user_changed_trampoline<
@@ -183,7 +183,7 @@ pub trait UserListExt: IsA<UserList> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"user-changed".as_ptr() as *const _,
+                c"user-changed".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     user_changed_trampoline::<Self, F> as *const (),
                 )),
@@ -194,7 +194,7 @@ pub trait UserListExt: IsA<UserList> + 'static {
 
     /// The ::user-removed signal gets emitted when a user account is removed.
     /// ## `user`
-    /// The [`User`][crate::User] that has been removed.
+    /// The #LightDMUser that has been removed.
     #[doc(alias = "user-removed")]
     fn connect_user_removed<F: Fn(&Self, &User) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe extern "C" fn user_removed_trampoline<
@@ -217,7 +217,7 @@ pub trait UserListExt: IsA<UserList> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"user-removed".as_ptr() as *const _,
+                c"user-removed".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     user_removed_trampoline::<Self, F> as *const (),
                 )),
@@ -242,7 +242,7 @@ pub trait UserListExt: IsA<UserList> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::length".as_ptr() as *const _,
+                c"notify::length".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_length_trampoline::<Self, F> as *const (),
                 )),
@@ -267,7 +267,7 @@ pub trait UserListExt: IsA<UserList> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::num-users".as_ptr() as *const _,
+                c"notify::num-users".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_num_users_trampoline::<Self, F> as *const (),
                 )),

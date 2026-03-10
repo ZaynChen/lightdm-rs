@@ -34,54 +34,71 @@ manual = [
 name = "LightDM.Greeter"
 status = "generate"
 manual_traits = ["GreeterExtManual"]
+
 [[object.function]]
 name = "authenticate"
 manual = true
+
 [[object.function]]
 name = "authenticate_as_guest"
 manual = true
+
 [[object.function]]
 name = "authenticate_autologin"
 manual = true
+
 [[object.function]]
 name = "authenticate_remote"
 manual = true
+
 [[object.function]]
 name = "cancel_authentication"
 manual = true
+
 [[object.function]]
 name = "connect_sync"
 manual = true
+
 [[object.function]]
 name = "connect_to_daemon"
 manual = true
+
 [[object.function]]
 name = "connect_to_daemon_future"
 manual = true
+
 [[object.function]]
 name = "connect_to_daemon_sync"
 manual = true
+
 [[object.function]]
 name = "ensure_shared_data_dir"
 manual = true
+
 [[object.function]]
-name = "ensure_shared_data_dir_futur"
+name = "ensure_shared_data_dir_future"
 manual = true
+
 [[object.function]]
 name = "ensure_shared_data_dir_sync"
 manual = true
+
 [[object.function]]
 name = "respond"
 manual = true
+
 [[object.function]]
 name = "set_language"
 manual = true
+
 [[object.function]]
 name = "start_session"
 manual = true
+
 [[object.function]]
 name = "start_session_future"
 manual = true
+
 [[object.function]]
 name = "start_session_sync"
 manual = true

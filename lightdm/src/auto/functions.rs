@@ -9,7 +9,7 @@ use glib::{prelude::*, translate::*};
 ///
 /// # Returns
 ///
-/// [`true`] if can hibernate the system
+/// #TRUE if can hibernate the system
 #[doc(alias = "lightdm_get_can_hibernate")]
 #[doc(alias = "get_can_hibernate")]
 pub fn can_hibernate() -> bool {
@@ -21,7 +21,7 @@ pub fn can_hibernate() -> bool {
 ///
 /// # Returns
 ///
-/// [`true`] if can restart the system
+/// #TRUE if can restart the system
 #[doc(alias = "lightdm_get_can_restart")]
 #[doc(alias = "get_can_restart")]
 pub fn can_restart() -> bool {
@@ -33,7 +33,7 @@ pub fn can_restart() -> bool {
 ///
 /// # Returns
 ///
-/// [`true`] if can shutdown the system
+/// #TRUE if can shutdown the system
 #[doc(alias = "lightdm_get_can_shutdown")]
 #[doc(alias = "get_can_shutdown")]
 pub fn can_shutdown() -> bool {
@@ -45,7 +45,7 @@ pub fn can_shutdown() -> bool {
 ///
 /// # Returns
 ///
-/// [`true`] if can suspend the system
+/// #TRUE if can suspend the system
 #[doc(alias = "lightdm_get_can_suspend")]
 #[doc(alias = "get_can_suspend")]
 pub fn can_suspend() -> bool {
@@ -68,7 +68,7 @@ pub fn hostname() -> Option<glib::GString> {
 ///
 /// # Returns
 ///
-/// The current language or [`None`] if no language.
+/// The current language or #NULL if no language.
 #[doc(alias = "lightdm_get_language")]
 #[doc(alias = "get_language")]
 pub fn language() -> Option<Language> {
@@ -80,7 +80,7 @@ pub fn language() -> Option<Language> {
 ///
 /// # Returns
 ///
-/// A list of [`Language`][crate::Language] that should be presented to the user.
+/// A list of #LightDMLanguage that should be presented to the user.
 #[doc(alias = "lightdm_get_languages")]
 #[doc(alias = "get_languages")]
 pub fn languages() -> Vec<Language> {
@@ -104,7 +104,7 @@ pub fn layout() -> Option<Layout> {
 ///
 /// # Returns
 ///
-/// A list of [`Layout`][crate::Layout] that should be presented to the user.
+/// A list of #LightDMLayout that should be presented to the user.
 #[doc(alias = "lightdm_get_layouts")]
 #[doc(alias = "get_layouts")]
 pub fn layouts() -> Vec<Layout> {
@@ -194,7 +194,7 @@ pub fn os_version_id() -> Option<glib::GString> {
 ///
 /// # Returns
 ///
-/// A list of [`Session`][crate::Session]
+/// A list of #LightDMSession
 #[doc(alias = "lightdm_get_remote_sessions")]
 #[doc(alias = "get_remote_sessions")]
 pub fn remote_sessions() -> Vec<Session> {
@@ -206,7 +206,7 @@ pub fn remote_sessions() -> Vec<Session> {
 ///
 /// # Returns
 ///
-/// A list of [`Session`][crate::Session]
+/// A list of #LightDMSession
 #[doc(alias = "lightdm_get_sessions")]
 #[doc(alias = "get_sessions")]
 pub fn sessions() -> Vec<Session> {
@@ -218,7 +218,7 @@ pub fn sessions() -> Vec<Session> {
 ///
 /// # Returns
 ///
-/// [`true`] if hibernate initiated.
+/// #TRUE if hibernate initiated.
 #[doc(alias = "lightdm_hibernate")]
 pub fn hibernate() -> Result<(), glib::Error> {
     assert_initialized_main_thread!();
@@ -238,7 +238,7 @@ pub fn hibernate() -> Result<(), glib::Error> {
 ///
 /// # Returns
 ///
-/// [`true`] if restart initiated.
+/// #TRUE if restart initiated.
 #[doc(alias = "lightdm_restart")]
 pub fn restart() -> Result<(), glib::Error> {
     assert_initialized_main_thread!();
@@ -269,7 +269,7 @@ pub fn set_layout(layout: &impl IsA<Layout>) {
 ///
 /// # Returns
 ///
-/// [`true`] if shutdown initiated.
+/// #TRUE if shutdown initiated.
 #[doc(alias = "lightdm_shutdown")]
 pub fn shutdown() -> Result<(), glib::Error> {
     assert_initialized_main_thread!();
@@ -289,7 +289,7 @@ pub fn shutdown() -> Result<(), glib::Error> {
 ///
 /// # Returns
 ///
-/// [`true`] if suspend initiated.
+/// #TRUE if suspend initiated.
 #[doc(alias = "lightdm_suspend")]
 pub fn suspend() -> Result<(), glib::Error> {
     assert_initialized_main_thread!();

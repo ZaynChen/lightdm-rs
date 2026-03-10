@@ -6,7 +6,7 @@ use crate::ffi;
 use glib::{prelude::*, translate::*};
 
 glib::wrapper! {
-    /// [`Layout`][crate::Layout] is an opaque data structure and can only be accessed
+    /// #LightDMLayout is an opaque data structure and can only be accessed
     /// using the provided functions.
     ///
     /// ## Properties

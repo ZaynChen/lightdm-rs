@@ -11,7 +11,7 @@ use glib::{
 use std::boxed::Box as Box_;
 
 glib::wrapper! {
-    /// [`Session`][crate::Session] is an opaque data structure and can only be accessed
+    /// #LightDMSession is an opaque data structure and can only be accessed
     /// using the provided functions.
     ///
     /// ## Properties
@@ -121,7 +121,7 @@ pub trait SessionExt: IsA<Session> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::comment".as_ptr() as *const _,
+                c"notify::comment".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_comment_trampoline::<Self, F> as *const (),
                 )),
@@ -146,7 +146,7 @@ pub trait SessionExt: IsA<Session> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::key".as_ptr() as *const _,
+                c"notify::key".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_key_trampoline::<Self, F> as *const (),
                 )),
@@ -171,7 +171,7 @@ pub trait SessionExt: IsA<Session> + 'static {
             let f: Box_<F> = Box_::new(f);
             connect_raw(
                 self.as_ptr() as *mut _,
-                c"notify::name".as_ptr() as *const _,
+                c"notify::name".as_ptr(),
                 Some(std::mem::transmute::<*const (), unsafe extern "C" fn()>(
                     notify_name_trampoline::<Self, F> as *const (),
                 )),
