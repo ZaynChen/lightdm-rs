@@ -1,18 +1,12 @@
 [package]
 name = "lightdm-sys"
-build = "build.rs"
 description = "FFI bindings for liblightdm-gobject-1"
-
-[package.edition]
-workspace = true
+build = "build.rs"
 
 [package.version]
 workspace = true
 
-[package.authors]
-workspace = true
-
-[package.categories]
+[package.edition]
 workspace = true
 
 [package.repository]
@@ -22,6 +16,9 @@ workspace = true
 workspace = true
 
 [package.keywords]
+workspace = true
+
+[package.categories]
 workspace = true
 
 [package.exclude]
@@ -42,21 +39,21 @@ all-features = true
 [dependencies]
 libc = "0.2"
 
-[dependencies.glib-sys]
+[dependencies.gio-sys]
 workspace = true
 
-[dependencies.gio-sys]
+[dependencies.glib-sys]
 workspace = true
 
 [dependencies.gobject-sys]
 workspace = true
 
-[build-dependencies]
-system-deps = "7"
-
 [dev-dependencies]
 shell-words = "1.0.0"
 tempfile = "3"
+
+[build-dependencies]
+system-deps = "7"
 
 [features]
 v1_11_1 = []
