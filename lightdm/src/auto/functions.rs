@@ -5,11 +5,6 @@
 use crate::{Language, Layout, Session, ffi};
 use glib::{prelude::*, translate::*};
 
-/// Checks if is authorized to do a system hibernate.
-///
-/// # Returns
-///
-/// #TRUE if can hibernate the system
 #[doc(alias = "lightdm_get_can_hibernate")]
 #[doc(alias = "get_can_hibernate")]
 pub fn can_hibernate() -> bool {
@@ -17,11 +12,6 @@ pub fn can_hibernate() -> bool {
     unsafe { from_glib(ffi::lightdm_get_can_hibernate()) }
 }
 
-/// Checks if is authorized to do a system restart.
-///
-/// # Returns
-///
-/// #TRUE if can restart the system
 #[doc(alias = "lightdm_get_can_restart")]
 #[doc(alias = "get_can_restart")]
 pub fn can_restart() -> bool {
@@ -29,11 +19,6 @@ pub fn can_restart() -> bool {
     unsafe { from_glib(ffi::lightdm_get_can_restart()) }
 }
 
-/// Checks if is authorized to do a system shutdown.
-///
-/// # Returns
-///
-/// #TRUE if can shutdown the system
 #[doc(alias = "lightdm_get_can_shutdown")]
 #[doc(alias = "get_can_shutdown")]
 pub fn can_shutdown() -> bool {
@@ -41,11 +26,6 @@ pub fn can_shutdown() -> bool {
     unsafe { from_glib(ffi::lightdm_get_can_shutdown()) }
 }
 
-/// Checks if authorized to do a system suspend.
-///
-/// # Returns
-///
-/// #TRUE if can suspend the system
 #[doc(alias = "lightdm_get_can_suspend")]
 #[doc(alias = "get_can_suspend")]
 pub fn can_suspend() -> bool {
@@ -53,10 +33,6 @@ pub fn can_suspend() -> bool {
     unsafe { from_glib(ffi::lightdm_get_can_suspend()) }
 }
 
-///
-/// # Returns
-///
-/// The name of the host we are running on.
 #[doc(alias = "lightdm_get_hostname")]
 #[doc(alias = "get_hostname")]
 pub fn hostname() -> Option<glib::GString> {
@@ -64,11 +40,6 @@ pub fn hostname() -> Option<glib::GString> {
     unsafe { from_glib_none(ffi::lightdm_get_hostname()) }
 }
 
-/// Get the current language.
-///
-/// # Returns
-///
-/// The current language or #NULL if no language.
 #[doc(alias = "lightdm_get_language")]
 #[doc(alias = "get_language")]
 pub fn language() -> Option<Language> {
@@ -76,11 +47,6 @@ pub fn language() -> Option<Language> {
     unsafe { from_glib_none(ffi::lightdm_get_language()) }
 }
 
-/// Get a list of languages to present to the user.
-///
-/// # Returns
-///
-/// A list of #LightDMLanguage that should be presented to the user.
 #[doc(alias = "lightdm_get_languages")]
 #[doc(alias = "get_languages")]
 pub fn languages() -> Vec<Language> {
@@ -88,11 +54,6 @@ pub fn languages() -> Vec<Language> {
     unsafe { FromGlibPtrContainer::from_glib_none(ffi::lightdm_get_languages()) }
 }
 
-/// Get the current keyboard layout.
-///
-/// # Returns
-///
-/// The currently active layout for this user.
 #[doc(alias = "lightdm_get_layout")]
 #[doc(alias = "get_layout")]
 pub fn layout() -> Option<Layout> {
@@ -100,11 +61,6 @@ pub fn layout() -> Option<Layout> {
     unsafe { from_glib_none(ffi::lightdm_get_layout()) }
 }
 
-/// Get a list of keyboard layouts to present to the user.
-///
-/// # Returns
-///
-/// A list of #LightDMLayout that should be presented to the user.
 #[doc(alias = "lightdm_get_layouts")]
 #[doc(alias = "get_layouts")]
 pub fn layouts() -> Vec<Layout> {
@@ -112,12 +68,6 @@ pub fn layouts() -> Vec<Layout> {
     unsafe { FromGlibPtrContainer::from_glib_none(ffi::lightdm_get_layouts()) }
 }
 
-/// Get a system message that should be presented to the user.
-/// e.g. "Welcome to Yoyodyne"
-///
-/// # Returns
-///
-/// a string (the contents of /etc/motd) or [`None`] if not set.
 #[doc(alias = "lightdm_get_motd")]
 #[doc(alias = "get_motd")]
 pub fn motd() -> Option<glib::GString> {
@@ -125,12 +75,6 @@ pub fn motd() -> Option<glib::GString> {
     unsafe { from_glib_full(ffi::lightdm_get_motd()) }
 }
 
-/// Get a word describing the OS, suitable for checking which OS the greeter is running on.
-/// e.g. "ubuntu"
-///
-/// # Returns
-///
-/// a string (ID variable from /etc/os-release) or [`None`] if not set.
 #[doc(alias = "lightdm_get_os_id")]
 #[doc(alias = "get_os_id")]
 pub fn os_id() -> Option<glib::GString> {
@@ -138,12 +82,6 @@ pub fn os_id() -> Option<glib::GString> {
     unsafe { from_glib_none(ffi::lightdm_get_os_id()) }
 }
 
-/// Get a line of text describing the OS without version information, suitable for presentation to the user.
-/// e.g. "Ubuntu"
-///
-/// # Returns
-///
-/// a string (NAME variable from /etc/os-release) or [`None`] if not set.
 #[doc(alias = "lightdm_get_os_name")]
 #[doc(alias = "get_os_name")]
 pub fn os_name() -> Option<glib::GString> {
@@ -151,12 +89,6 @@ pub fn os_name() -> Option<glib::GString> {
     unsafe { from_glib_none(ffi::lightdm_get_os_name()) }
 }
 
-/// Get a line of text describing the OS, suitable for presentation to the user.
-/// e.g. "Ubuntu 16.04.1 LTS"
-///
-/// # Returns
-///
-/// a string (PRETTY_NAME variable from /etc/os-release) or [`None`] if not set.
 #[doc(alias = "lightdm_get_os_pretty_name")]
 #[doc(alias = "get_os_pretty_name")]
 pub fn os_pretty_name() -> Option<glib::GString> {
@@ -164,12 +96,6 @@ pub fn os_pretty_name() -> Option<glib::GString> {
     unsafe { from_glib_none(ffi::lightdm_get_os_pretty_name()) }
 }
 
-/// Get a line of text describing the OS version, suitable for presentation to the user.
-/// e.g. "16.04.1 LTS (Xenial Xapus)"
-///
-/// # Returns
-///
-/// a string (VERSION variable from /etc/os-release) or [`None`] if not set.
 #[doc(alias = "lightdm_get_os_version")]
 #[doc(alias = "get_os_version")]
 pub fn os_version() -> Option<glib::GString> {
@@ -177,12 +103,6 @@ pub fn os_version() -> Option<glib::GString> {
     unsafe { from_glib_none(ffi::lightdm_get_os_version()) }
 }
 
-/// Get a word descibing the OS version, suitable for checking which version of the OS this greeter is running on.
-/// e.g. "16.04"
-///
-/// # Returns
-///
-/// a string (VERSION_ID variable from /etc/os-release) or [`None`] if not set.
 #[doc(alias = "lightdm_get_os_version_id")]
 #[doc(alias = "get_os_version_id")]
 pub fn os_version_id() -> Option<glib::GString> {
@@ -190,11 +110,6 @@ pub fn os_version_id() -> Option<glib::GString> {
     unsafe { from_glib_none(ffi::lightdm_get_os_version_id()) }
 }
 
-/// Get the available remote sessions.
-///
-/// # Returns
-///
-/// A list of #LightDMSession
 #[doc(alias = "lightdm_get_remote_sessions")]
 #[doc(alias = "get_remote_sessions")]
 pub fn remote_sessions() -> Vec<Session> {
@@ -202,11 +117,6 @@ pub fn remote_sessions() -> Vec<Session> {
     unsafe { FromGlibPtrContainer::from_glib_none(ffi::lightdm_get_remote_sessions()) }
 }
 
-/// Get the available sessions.
-///
-/// # Returns
-///
-/// A list of #LightDMSession
 #[doc(alias = "lightdm_get_sessions")]
 #[doc(alias = "get_sessions")]
 pub fn sessions() -> Vec<Session> {
@@ -214,11 +124,6 @@ pub fn sessions() -> Vec<Session> {
     unsafe { FromGlibPtrContainer::from_glib_none(ffi::lightdm_get_sessions()) }
 }
 
-/// Triggers a system hibernate.
-///
-/// # Returns
-///
-/// #TRUE if hibernate initiated.
 #[doc(alias = "lightdm_hibernate")]
 pub fn hibernate() -> Result<(), glib::Error> {
     assert_initialized_main_thread!();
@@ -234,11 +139,6 @@ pub fn hibernate() -> Result<(), glib::Error> {
     }
 }
 
-/// Triggers a system restart.
-///
-/// # Returns
-///
-/// #TRUE if restart initiated.
 #[doc(alias = "lightdm_restart")]
 pub fn restart() -> Result<(), glib::Error> {
     assert_initialized_main_thread!();
@@ -254,9 +154,6 @@ pub fn restart() -> Result<(), glib::Error> {
     }
 }
 
-/// Set the layout for this session.
-/// ## `layout`
-/// The layout to use
 #[doc(alias = "lightdm_set_layout")]
 pub fn set_layout(layout: &impl IsA<Layout>) {
     skip_assert_initialized!();
@@ -265,11 +162,6 @@ pub fn set_layout(layout: &impl IsA<Layout>) {
     }
 }
 
-/// Triggers a system shutdown.
-///
-/// # Returns
-///
-/// #TRUE if shutdown initiated.
 #[doc(alias = "lightdm_shutdown")]
 pub fn shutdown() -> Result<(), glib::Error> {
     assert_initialized_main_thread!();
@@ -285,11 +177,6 @@ pub fn shutdown() -> Result<(), glib::Error> {
     }
 }
 
-/// Triggers a system suspend.
-///
-/// # Returns
-///
-/// #TRUE if suspend initiated.
 #[doc(alias = "lightdm_suspend")]
 pub fn suspend() -> Result<(), glib::Error> {
     assert_initialized_main_thread!();

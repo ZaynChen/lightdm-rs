@@ -11,26 +11,6 @@ use glib::{
 use std::boxed::Box as Box_;
 
 glib::wrapper! {
-    /// #LightDMSession is an opaque data structure and can only be accessed
-    /// using the provided functions.
-    ///
-    /// ## Properties
-    ///
-    ///
-    /// #### `comment`
-    ///  Readable
-    ///
-    ///
-    /// #### `key`
-    ///  Readable
-    ///
-    ///
-    /// #### `name`
-    ///  Readable
-    ///
-    /// # Implements
-    ///
-    /// [`SessionExt`][trait@crate::prelude::SessionExt]
     #[doc(alias = "LightDMSession")]
     pub struct Session(Object<ffi::LightDMSession, ffi::LightDMSessionClass>);
 
@@ -43,17 +23,7 @@ impl Session {
     pub const NONE: Option<&'static Session> = None;
 }
 
-/// Trait containing all [`struct@Session`] methods.
-///
-/// # Implementors
-///
-/// [`Session`][struct@crate::Session]
 pub trait SessionExt: IsA<Session> + 'static {
-    /// Get the comment for a session
-    ///
-    /// # Returns
-    ///
-    /// The session comment
     #[doc(alias = "lightdm_session_get_comment")]
     #[doc(alias = "get_comment")]
     fn comment(&self) -> Option<glib::GString> {
@@ -64,22 +34,12 @@ pub trait SessionExt: IsA<Session> + 'static {
         }
     }
 
-    /// Get the key for a session
-    ///
-    /// # Returns
-    ///
-    /// The session key
     #[doc(alias = "lightdm_session_get_key")]
     #[doc(alias = "get_key")]
     fn key(&self) -> Option<glib::GString> {
         unsafe { from_glib_none(ffi::lightdm_session_get_key(self.as_ref().to_glib_none().0)) }
     }
 
-    /// Get the name for a session
-    ///
-    /// # Returns
-    ///
-    /// The session name
     #[doc(alias = "lightdm_session_get_name")]
     #[doc(alias = "get_name")]
     fn name(&self) -> Option<glib::GString> {
@@ -90,11 +50,6 @@ pub trait SessionExt: IsA<Session> + 'static {
         }
     }
 
-    /// Get the type a session
-    ///
-    /// # Returns
-    ///
-    /// The session type, e.g. x or mir
     #[doc(alias = "lightdm_session_get_session_type")]
     #[doc(alias = "get_session_type")]
     fn session_type(&self) -> Option<glib::GString> {

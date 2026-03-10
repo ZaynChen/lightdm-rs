@@ -1,0 +1,41 @@
+name: github packages
+
+on:
+  # Rebuild the container once every week
+  schedule:
+    - cron: 0 0 * * 1
+  push:
+    branches:
+      - main
+    paths:
+      - Dockerfile
+  pull_request:
+    branches:
+      - main
+    paths:
+      - Dockerfile
+  workflow_dispatch:
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: ghcr.io
+
+      - name: Sanitize repository name
+        id: sanitize
+        run: |
+          echo "repo=${GITHUB_REPOSITORY,,}" >> $GITHUB_OUTPUT
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+
+      - name: Push to GitHub Packages
+        uses: docker/build-push-action@v6
+        with:
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ghcr.io/${{ steps.sanitize.outputs.repo }}/lightdm:latest

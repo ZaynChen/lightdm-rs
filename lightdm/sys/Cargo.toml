@@ -1,6 +1,7 @@
 [package]
 name = "lightdm-sys"
 description = "FFI bindings for liblightdm-gobject-1"
+documentation = "https://zaynchen.github.io/lightdm-rs/stable/latest/docs/lightdm_sys/index.html"
 build = "build.rs"
 
 [package.version]
@@ -32,8 +33,7 @@ version = "1"
 version = "1.11.1"
 
 [package.metadata.docs.rs]
-rustc-args = ["--cfg", "docsrs"]
-rustdoc-args = ["--cfg", "docsrs", "--generate-link-to-definition"]
+rustdoc-args = ["--generate-link-to-definition"]
 all-features = true
 
 [dependencies]

@@ -5,24 +5,18 @@
 use crate::ffi;
 use glib::{prelude::*, translate::*};
 
-/// Error codes returned by greeter operations.
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Clone, Copy)]
 #[non_exhaustive]
 #[doc(alias = "LightDMGreeterError")]
 pub enum GreeterError {
-    /// error communicating with daemon.
     #[doc(alias = "LIGHTDM_GREETER_ERROR_COMMUNICATION_ERROR")]
     CommunicationError,
-    /// failed to connect to the daemon.
     #[doc(alias = "LIGHTDM_GREETER_ERROR_CONNECTION_FAILED")]
     ConnectionFailed,
-    /// requested session failed to start.
     #[doc(alias = "LIGHTDM_GREETER_ERROR_SESSION_FAILED")]
     SessionFailed,
-    /// autologin not configured.
     #[doc(alias = "LIGHTDM_GREETER_ERROR_NO_AUTOLOGIN")]
     NoAutologin,
-    /// autologin not configured.
     #[doc(alias = "LIGHTDM_GREETER_ERROR_INVALID_USER")]
     InvalidUser,
     #[doc(hidden)]
@@ -146,10 +140,8 @@ impl From<GreeterError> for glib::Value {
 #[non_exhaustive]
 #[doc(alias = "LightDMMessageType")]
 pub enum MessageType {
-    /// Informational message.
     #[doc(alias = "LIGHTDM_MESSAGE_TYPE_INFO")]
     Info,
-    /// Error message.
     #[doc(alias = "LIGHTDM_MESSAGE_TYPE_ERROR")]
     Error,
     #[doc(hidden)]
@@ -240,15 +232,12 @@ impl From<MessageType> for glib::Value {
     }
 }
 
-/// Prompt types the client is required to display.
 #[derive(Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Clone, Copy)]
 #[non_exhaustive]
 #[doc(alias = "LightDMPromptType")]
 pub enum PromptType {
-    /// prompt is a question.  The information can be shown as it is entered.
     #[doc(alias = "LIGHTDM_PROMPT_TYPE_QUESTION")]
     Question,
-    /// prompt is for secret information.  The entered information should be obscured so it can't be publically visible.
     #[doc(alias = "LIGHTDM_PROMPT_TYPE_SECRET")]
     Secret,
     #[doc(hidden)]

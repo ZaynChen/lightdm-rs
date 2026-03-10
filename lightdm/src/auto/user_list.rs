@@ -12,42 +12,6 @@ use glib::{
 use std::boxed::Box as Box_;
 
 glib::wrapper! {
-    /// #LightDMUserList is an opaque data structure and can only be accessed
-    /// using the provided functions.
-    ///
-    /// ## Properties
-    ///
-    ///
-    /// #### `length`
-    ///  Readable
-    ///
-    ///
-    /// #### `num-users`
-    ///  Readable
-    ///
-    /// ## Signals
-    ///
-    ///
-    /// #### `user-added`
-    ///  The ::user-added signal gets emitted when a user account is created.
-    ///
-    ///
-    ///
-    ///
-    /// #### `user-changed`
-    ///  The ::user-changed signal gets emitted when a user account is modified.
-    ///
-    ///
-    ///
-    ///
-    /// #### `user-removed`
-    ///  The ::user-removed signal gets emitted when a user account is removed.
-    ///
-    ///
-    ///
-    /// # Implements
-    ///
-    /// [`UserListExt`][trait@crate::prelude::UserListExt]
     #[doc(alias = "LightDMUserList")]
     pub struct UserList(Object<ffi::LightDMUserList, ffi::LightDMUserListClass>);
 
@@ -59,11 +23,6 @@ glib::wrapper! {
 impl UserList {
     pub const NONE: Option<&'static UserList> = None;
 
-    /// Get the user list.
-    ///
-    /// # Returns
-    ///
-    /// the #LightDMUserList
     #[doc(alias = "lightdm_user_list_get_instance")]
     #[doc(alias = "get_instance")]
     pub fn instance() -> Option<UserList> {
@@ -72,29 +31,13 @@ impl UserList {
     }
 }
 
-/// Trait containing all [`struct@UserList`] methods.
-///
-/// # Implementors
-///
-/// [`UserList`][struct@crate::UserList]
 pub trait UserListExt: IsA<UserList> + 'static {
-    ///
-    /// # Returns
-    ///
-    /// The number of users able to log in
     #[doc(alias = "lightdm_user_list_get_length")]
     #[doc(alias = "get_length")]
     fn length(&self) -> i32 {
         unsafe { ffi::lightdm_user_list_get_length(self.as_ref().to_glib_none().0) }
     }
 
-    /// Get information about a given user or #NULL if this user doesn't exist.
-    /// ## `username`
-    /// Name of user to get.
-    ///
-    /// # Returns
-    ///
-    /// A #LightDMUser entry for the given user.
     #[doc(alias = "lightdm_user_list_get_user_by_name")]
     #[doc(alias = "get_user_by_name")]
     fn user_by_name(&self, username: &str) -> Option<User> {
@@ -106,12 +49,6 @@ pub trait UserListExt: IsA<UserList> + 'static {
         }
     }
 
-    /// Get a list of users to present to the user.  This list may be a subset of the
-    /// available users and may be empty depending on the server configuration.
-    ///
-    /// # Returns
-    ///
-    /// A list of #LightDMUser that should be presented to the user.
     #[doc(alias = "lightdm_user_list_get_users")]
     #[doc(alias = "get_users")]
     fn users(&self) -> Vec<User> {
@@ -127,9 +64,6 @@ pub trait UserListExt: IsA<UserList> + 'static {
         ObjectExt::property(self.as_ref(), "num-users")
     }
 
-    /// The ::user-added signal gets emitted when a user account is created.
-    /// ## `user`
-    /// The #LightDMUser that has been added.
     #[doc(alias = "user-added")]
     fn connect_user_added<F: Fn(&Self, &User) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe extern "C" fn user_added_trampoline<P: IsA<UserList>, F: Fn(&P, &User) + 'static>(
@@ -158,9 +92,6 @@ pub trait UserListExt: IsA<UserList> + 'static {
         }
     }
 
-    /// The ::user-changed signal gets emitted when a user account is modified.
-    /// ## `user`
-    /// The #LightDMUser that has been changed.
     #[doc(alias = "user-changed")]
     fn connect_user_changed<F: Fn(&Self, &User) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe extern "C" fn user_changed_trampoline<
@@ -192,9 +123,6 @@ pub trait UserListExt: IsA<UserList> + 'static {
         }
     }
 
-    /// The ::user-removed signal gets emitted when a user account is removed.
-    /// ## `user`
-    /// The #LightDMUser that has been removed.
     #[doc(alias = "user-removed")]
     fn connect_user_removed<F: Fn(&Self, &User) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe extern "C" fn user_removed_trampoline<

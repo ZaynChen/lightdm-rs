@@ -12,78 +12,6 @@ use glib::{
 use std::boxed::Box as Box_;
 
 glib::wrapper! {
-    /// #LightDMUser is an opaque data structure and can only be accessed
-    /// using the provided functions.
-    ///
-    /// ## Properties
-    ///
-    ///
-    /// #### `background`
-    ///  Readable
-    ///
-    ///
-    /// #### `display-name`
-    ///  Readable
-    ///
-    ///
-    /// #### `has-messages`
-    ///  Readable
-    ///
-    ///
-    /// #### `home-directory`
-    ///  Readable
-    ///
-    ///
-    /// #### `image`
-    ///  Readable
-    ///
-    ///
-    /// #### `is-locked`
-    ///  Readable
-    ///
-    ///
-    /// #### `language`
-    ///  Readable
-    ///
-    ///
-    /// #### `layout`
-    ///  Readable
-    ///
-    ///
-    /// #### `layouts`
-    ///  Readable
-    ///
-    ///
-    /// #### `logged-in`
-    ///  Readable
-    ///
-    ///
-    /// #### `name`
-    ///  Readable
-    ///
-    ///
-    /// #### `real-name`
-    ///  Readable
-    ///
-    ///
-    /// #### `session`
-    ///  Readable
-    ///
-    ///
-    /// #### `uid`
-    ///  Readable
-    ///
-    /// ## Signals
-    ///
-    ///
-    /// #### `changed`
-    ///  The ::changed signal gets emitted this user account is modified.
-    ///
-    ///
-    ///
-    /// # Implements
-    ///
-    /// [`UserExt`][trait@crate::prelude::UserExt]
     #[doc(alias = "LightDMUser")]
     pub struct User(Object<ffi::LightDMUser, ffi::LightDMUserClass>);
 
@@ -96,17 +24,7 @@ impl User {
     pub const NONE: Option<&'static User> = None;
 }
 
-/// Trait containing all [`struct@User`] methods.
-///
-/// # Implementors
-///
-/// [`User`][struct@crate::User]
 pub trait UserExt: IsA<User> + 'static {
-    /// Get the background file path for a user.
-    ///
-    /// # Returns
-    ///
-    /// The background file path for the given user or #NULL if no path
     #[doc(alias = "lightdm_user_get_background")]
     #[doc(alias = "get_background")]
     fn background(&self) -> Option<glib::GString> {
@@ -117,11 +35,6 @@ pub trait UserExt: IsA<User> + 'static {
         }
     }
 
-    /// Get the display name of a user.
-    ///
-    /// # Returns
-    ///
-    /// The display name of the given user
     #[doc(alias = "lightdm_user_get_display_name")]
     #[doc(alias = "get_display_name")]
     #[doc(alias = "display-name")]
@@ -133,11 +46,6 @@ pub trait UserExt: IsA<User> + 'static {
         }
     }
 
-    /// Check if a user has waiting messages.
-    ///
-    /// # Returns
-    ///
-    /// #TRUE if the user has waiting messages.
     #[doc(alias = "lightdm_user_get_has_messages")]
     #[doc(alias = "get_has_messages")]
     #[doc(alias = "has-messages")]
@@ -149,11 +57,6 @@ pub trait UserExt: IsA<User> + 'static {
         }
     }
 
-    /// Get the home directory for a user.
-    ///
-    /// # Returns
-    ///
-    /// The users home directory
     #[doc(alias = "lightdm_user_get_home_directory")]
     #[doc(alias = "get_home_directory")]
     #[doc(alias = "home-directory")]
@@ -165,22 +68,12 @@ pub trait UserExt: IsA<User> + 'static {
         }
     }
 
-    /// Get the image URI for a user.
-    ///
-    /// # Returns
-    ///
-    /// The image URI for the given user or #NULL if no URI
     #[doc(alias = "lightdm_user_get_image")]
     #[doc(alias = "get_image")]
     fn image(&self) -> Option<glib::GString> {
         unsafe { from_glib_none(ffi::lightdm_user_get_image(self.as_ref().to_glib_none().0)) }
     }
 
-    /// Get if the user is locked.
-    ///
-    /// # Returns
-    ///
-    /// [`true`] if the user is locked
     #[doc(alias = "lightdm_user_get_is_locked")]
     #[doc(alias = "get_is_locked")]
     #[doc(alias = "is-locked")]
@@ -192,11 +85,6 @@ pub trait UserExt: IsA<User> + 'static {
         }
     }
 
-    /// Get the language for a user.
-    ///
-    /// # Returns
-    ///
-    /// The language in the form of a local specification (e.g. "de_DE.UTF-8") for the given user or #NULL if using the system default locale.
     #[doc(alias = "lightdm_user_get_language")]
     #[doc(alias = "get_language")]
     fn language(&self) -> Option<glib::GString> {
@@ -207,22 +95,12 @@ pub trait UserExt: IsA<User> + 'static {
         }
     }
 
-    /// Get the keyboard layout for a user.
-    ///
-    /// # Returns
-    ///
-    /// The keyboard layout for the given user or #NULL if using system defaults.  Copy the value if you want to use it long term.
     #[doc(alias = "lightdm_user_get_layout")]
     #[doc(alias = "get_layout")]
     fn layout(&self) -> Option<glib::GString> {
         unsafe { from_glib_none(ffi::lightdm_user_get_layout(self.as_ref().to_glib_none().0)) }
     }
 
-    /// Get the configured keyboard layouts for a user.
-    ///
-    /// # Returns
-    ///
-    /// A NULL-terminated array of keyboard layouts for the given user.  Copy the values if you want to use them long term.
     #[doc(alias = "lightdm_user_get_layouts")]
     #[doc(alias = "get_layouts")]
     fn layouts(&self) -> Vec<glib::GString> {
@@ -233,11 +111,6 @@ pub trait UserExt: IsA<User> + 'static {
         }
     }
 
-    /// Check if a user is logged in.
-    ///
-    /// # Returns
-    ///
-    /// #TRUE if the user is currently logged in.
     #[doc(alias = "lightdm_user_get_logged_in")]
     #[doc(alias = "get_logged_in")]
     #[doc(alias = "logged-in")]
@@ -249,22 +122,12 @@ pub trait UserExt: IsA<User> + 'static {
         }
     }
 
-    /// Get the name of a user.
-    ///
-    /// # Returns
-    ///
-    /// The name of the given user
     #[doc(alias = "lightdm_user_get_name")]
     #[doc(alias = "get_name")]
     fn name(&self) -> Option<glib::GString> {
         unsafe { from_glib_none(ffi::lightdm_user_get_name(self.as_ref().to_glib_none().0)) }
     }
 
-    /// Get the real name of a user.
-    ///
-    /// # Returns
-    ///
-    /// The real name of the given user
     #[doc(alias = "lightdm_user_get_real_name")]
     #[doc(alias = "get_real_name")]
     #[doc(alias = "real-name")]
@@ -276,11 +139,6 @@ pub trait UserExt: IsA<User> + 'static {
         }
     }
 
-    /// Get the session for a user.
-    ///
-    /// # Returns
-    ///
-    /// The session for the given user or #NULL if using system defaults.
     #[doc(alias = "lightdm_user_get_session")]
     #[doc(alias = "get_session")]
     fn session(&self) -> Option<glib::GString> {
@@ -291,18 +149,12 @@ pub trait UserExt: IsA<User> + 'static {
         }
     }
 
-    /// Get the uid of a user.
-    ///
-    /// # Returns
-    ///
-    /// The uid of the given user
     #[doc(alias = "lightdm_user_get_uid")]
     #[doc(alias = "get_uid")]
     fn uid(&self) -> u32 {
         unsafe { ffi::lightdm_user_get_uid(self.as_ref().to_glib_none().0) }
     }
 
-    /// The ::changed signal gets emitted this user account is modified.
     #[doc(alias = "changed")]
     fn connect_changed<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe extern "C" fn changed_trampoline<P: IsA<User>, F: Fn(&P) + 'static>(

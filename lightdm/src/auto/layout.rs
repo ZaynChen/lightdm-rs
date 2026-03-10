@@ -6,26 +6,6 @@ use crate::ffi;
 use glib::{prelude::*, translate::*};
 
 glib::wrapper! {
-    /// #LightDMLayout is an opaque data structure and can only be accessed
-    /// using the provided functions.
-    ///
-    /// ## Properties
-    ///
-    ///
-    /// #### `description`
-    ///  Readable | Writeable | Construct Only
-    ///
-    ///
-    /// #### `name`
-    ///  Readable | Writeable | Construct Only
-    ///
-    ///
-    /// #### `short-description`
-    ///  Readable | Writeable | Construct Only
-    ///
-    /// # Implements
-    ///
-    /// [`LayoutExt`][trait@crate::prelude::LayoutExt]
     #[doc(alias = "LightDMLayout")]
     pub struct Layout(Object<ffi::LightDMLayout, ffi::LightDMLayoutClass>);
 
@@ -91,17 +71,7 @@ impl LayoutBuilder {
     }
 }
 
-/// Trait containing all [`struct@Layout`] methods.
-///
-/// # Implementors
-///
-/// [`Layout`][struct@crate::Layout]
 pub trait LayoutExt: IsA<Layout> + 'static {
-    /// Get the long description of a layout.
-    ///
-    /// # Returns
-    ///
-    /// A long description of the layout
     #[doc(alias = "lightdm_layout_get_description")]
     #[doc(alias = "get_description")]
     fn description(&self) -> Option<glib::GString> {
@@ -112,22 +82,12 @@ pub trait LayoutExt: IsA<Layout> + 'static {
         }
     }
 
-    /// Get the name of a layout.
-    ///
-    /// # Returns
-    ///
-    /// The name of the layout
     #[doc(alias = "lightdm_layout_get_name")]
     #[doc(alias = "get_name")]
     fn name(&self) -> Option<glib::GString> {
         unsafe { from_glib_none(ffi::lightdm_layout_get_name(self.as_ref().to_glib_none().0)) }
     }
 
-    /// Get the short description of a layout.
-    ///
-    /// # Returns
-    ///
-    /// A short description of the layout
     #[doc(alias = "lightdm_layout_get_short_description")]
     #[doc(alias = "get_short_description")]
     #[doc(alias = "short-description")]

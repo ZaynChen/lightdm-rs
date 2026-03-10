@@ -1,0 +1,13 @@
+[package]
+name = "examples"
+version = "0.1.0"
+edition = "2024"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bin]]
+name = "greeter"
+path = "main.rs"
+
+[dependencies]
+lightdm = { package = "lightdm", path = "../lightdm", version = "0.1" }

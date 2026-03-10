@@ -11,26 +11,6 @@ use glib::{
 use std::boxed::Box as Box_;
 
 glib::wrapper! {
-    /// #LightDMLanguage is an opaque data structure and can only be accessed
-    /// using the provided functions.
-    ///
-    /// ## Properties
-    ///
-    ///
-    /// #### `code`
-    ///  Readable | Writeable | Construct Only
-    ///
-    ///
-    /// #### `name`
-    ///  Readable
-    ///
-    ///
-    /// #### `territory`
-    ///  Readable
-    ///
-    /// # Implements
-    ///
-    /// [`LanguageExt`][trait@crate::prelude::LanguageExt]
     #[doc(alias = "LightDMLanguage")]
     pub struct Language(Object<ffi::LightDMLanguage, ffi::LightDMLanguageClass>);
 
@@ -82,17 +62,7 @@ impl LanguageBuilder {
     }
 }
 
-/// Trait containing all [`struct@Language`] methods.
-///
-/// # Implementors
-///
-/// [`Language`][struct@crate::Language]
 pub trait LanguageExt: IsA<Language> + 'static {
-    /// Get the code of a language (e.g. "de_DE.UTF-8")
-    ///
-    /// # Returns
-    ///
-    /// The code of the language
     #[doc(alias = "lightdm_language_get_code")]
     #[doc(alias = "get_code")]
     fn code(&self) -> Option<glib::GString> {
@@ -103,11 +73,6 @@ pub trait LanguageExt: IsA<Language> + 'static {
         }
     }
 
-    /// Get the name of a language.
-    ///
-    /// # Returns
-    ///
-    /// The name of the language
     #[doc(alias = "lightdm_language_get_name")]
     #[doc(alias = "get_name")]
     fn name(&self) -> Option<glib::GString> {
@@ -118,11 +83,6 @@ pub trait LanguageExt: IsA<Language> + 'static {
         }
     }
 
-    /// Get the territory the language is used in.
-    ///
-    /// # Returns
-    ///
-    /// The territory the language is used in.
     #[doc(alias = "lightdm_language_get_territory")]
     #[doc(alias = "get_territory")]
     fn territory(&self) -> Option<glib::GString> {
@@ -133,13 +93,6 @@ pub trait LanguageExt: IsA<Language> + 'static {
         }
     }
 
-    /// Check if a language code matches this language.
-    /// ## `code`
-    /// A language code
-    ///
-    /// # Returns
-    ///
-    /// #TRUE if the code matches this language.
     #[doc(alias = "lightdm_language_matches")]
     fn matches(&self, code: &str) -> bool {
         unsafe {

@@ -13,131 +13,6 @@ use glib::{
 use std::boxed::Box as Box_;
 
 glib::wrapper! {
-    /// #LightDMGreeter is an opaque data structure and can only be accessed
-    /// using the provided functions.
-    ///
-    /// ## Properties
-    ///
-    ///
-    /// #### `authentication-user`
-    ///  Readable
-    ///
-    ///
-    /// #### `autologin-guest-hint`
-    ///  Readable
-    ///
-    ///
-    /// #### `autologin-session-hint`
-    ///  Readable
-    ///
-    ///
-    /// #### `autologin-timeout-hint`
-    ///  Readable
-    ///
-    ///
-    /// #### `autologin-user-hint`
-    ///  Readable
-    ///
-    ///
-    /// #### `default-session-hint`
-    ///  Readable
-    ///
-    ///
-    /// #### `has-guest-account-hint`
-    ///  Readable
-    ///
-    ///
-    /// #### `hide-users-hint`
-    ///  Readable
-    ///
-    ///
-    /// #### `in-authentication`
-    ///  Readable
-    ///
-    ///
-    /// #### `is-authenticated`
-    ///  Readable
-    ///
-    ///
-    /// #### `lock-hint`
-    ///  Readable
-    ///
-    ///
-    /// #### `select-guest-hint`
-    ///  Readable
-    ///
-    ///
-    /// #### `select-user-hint`
-    ///  Readable
-    ///
-    ///
-    /// #### `show-manual-login-hint`
-    ///  Readable
-    ///
-    ///
-    /// #### `show-remote-login-hint`
-    ///  Readable
-    ///
-    /// ## Signals
-    ///
-    ///
-    /// #### `authentication-complete`
-    ///  The ::authentication-complete signal gets emitted when the greeter
-    /// has completed authentication.
-    ///
-    /// Call lightdm_greeter_get_is_authenticated() to check if the authentication
-    /// was successful.
-    ///
-    ///
-    ///
-    ///
-    /// #### `autologin-timer-expired`
-    ///  The ::timed-login signal gets emitted when the automatic login timer has expired.
-    /// The application should then call lightdm_greeter_authenticate_autologin().
-    ///
-    ///
-    ///
-    ///
-    /// #### `idle`
-    ///  The ::idle signal gets emitted when the user has logged in and the
-    /// greeter is no longer needed.
-    ///
-    /// This signal only matters if the greeter has marked itself as
-    /// resettable using lightdm_greeter_set_resettable().
-    ///
-    ///
-    ///
-    ///
-    /// #### `reset`
-    ///  The ::reset signal gets emitted when the user is returning to a greeter
-    /// that was previously marked idle.
-    ///
-    /// This signal only matters if the greeter has marked itself as
-    /// resettable using lightdm_greeter_set_resettable().
-    ///
-    ///
-    ///
-    ///
-    /// #### `show-message`
-    ///  The ::show-message signal gets emitted when the greeter
-    /// should show a message to the user.
-    ///
-    ///
-    ///
-    ///
-    /// #### `show-prompt`
-    ///  The ::show-prompt signal gets emitted when the greeter should show a
-    /// prompt to the user.  The given text should be displayed and an input
-    /// field for the user to provide a response.
-    ///
-    /// Call lightdm_greeter_respond() with the resultant input or
-    /// lightdm_greeter_cancel_authentication() to abort the authentication.
-    ///
-    ///
-    ///
-    /// # Implements
-    ///
-    /// [`GreeterExt`][trait@crate::prelude::GreeterExt], [`GreeterExtManual`][trait@crate::prelude::GreeterExtManual]
     #[doc(alias = "LightDMGreeter")]
     pub struct Greeter(Object<ffi::LightDMGreeter, ffi::LightDMGreeterClass>);
 
@@ -149,11 +24,6 @@ glib::wrapper! {
 impl Greeter {
     pub const NONE: Option<&'static Greeter> = None;
 
-    /// Create a new greeter.
-    ///
-    /// # Returns
-    ///
-    /// the new #LightDMGreeter
     #[doc(alias = "lightdm_greeter_new")]
     pub fn new() -> Greeter {
         assert_initialized_main_thread!();
@@ -167,13 +37,7 @@ impl Default for Greeter {
     }
 }
 
-/// Trait containing all [`struct@Greeter`] methods.
-///
-/// # Implementors
-///
-/// [`Greeter`][struct@crate::Greeter]
 pub trait GreeterExt: IsA<Greeter> + 'static {
-    /// Cancel the automatic login.
     #[doc(alias = "lightdm_greeter_cancel_autologin")]
     fn cancel_autologin(&self) {
         unsafe {
@@ -181,11 +45,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// Get the user that is being authenticated.
-    ///
-    /// # Returns
-    ///
-    /// The username of the authentication user being authenticated or #NULL if no authentication in progress.
     #[doc(alias = "lightdm_greeter_get_authentication_user")]
     #[doc(alias = "get_authentication_user")]
     #[doc(alias = "authentication-user")]
@@ -197,11 +56,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// Check if the guest account should be automatically logged into when the timer expires.
-    ///
-    /// # Returns
-    ///
-    /// #TRUE if the guest account should be automatically logged into.
     #[doc(alias = "lightdm_greeter_get_autologin_guest_hint")]
     #[doc(alias = "get_autologin_guest_hint")]
     #[doc(alias = "autologin-guest-hint")]
@@ -213,11 +67,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// Get the session used to automatically log into when the timer expires.
-    ///
-    /// # Returns
-    ///
-    /// The session name or [`None`] if configured to use the default.
     #[doc(alias = "lightdm_greeter_get_autologin_session_hint")]
     #[doc(alias = "get_autologin_session_hint")]
     #[doc(alias = "autologin-session-hint")]
@@ -229,11 +78,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// Get the number of seconds to wait before automatically logging in.
-    ///
-    /// # Returns
-    ///
-    /// The number of seconds to wait before automatically logging in or 0 for no timeout.
     #[doc(alias = "lightdm_greeter_get_autologin_timeout_hint")]
     #[doc(alias = "get_autologin_timeout_hint")]
     #[doc(alias = "autologin-timeout-hint")]
@@ -241,11 +85,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         unsafe { ffi::lightdm_greeter_get_autologin_timeout_hint(self.as_ref().to_glib_none().0) }
     }
 
-    /// Get the user account to automatically log into when the timer expires.
-    ///
-    /// # Returns
-    ///
-    /// The user account to automatically log into or [`None`] if none configured.
     #[doc(alias = "lightdm_greeter_get_autologin_user_hint")]
     #[doc(alias = "get_autologin_user_hint")]
     #[doc(alias = "autologin-user-hint")]
@@ -257,11 +96,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// Get the default session to use.
-    ///
-    /// # Returns
-    ///
-    /// The session name
     #[doc(alias = "lightdm_greeter_get_default_session_hint")]
     #[doc(alias = "get_default_session_hint")]
     #[doc(alias = "default-session-hint")]
@@ -273,11 +107,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// Check if guest sessions are supported.
-    ///
-    /// # Returns
-    ///
-    /// #TRUE if guest sessions are supported.
     #[doc(alias = "lightdm_greeter_get_has_guest_account_hint")]
     #[doc(alias = "get_has_guest_account_hint")]
     #[doc(alias = "has-guest-account-hint")]
@@ -289,17 +118,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// Check if user accounts should be shown.  If this is TRUE then the list of
-    /// accounts should be taken from #LightDMUserList and displayed in the greeter
-    /// for the user to choose from.  Note that this list can be empty and it is
-    /// recommended you show a method for the user to enter a username manually.
-    ///
-    /// If this option is shown the greeter should only allow these users to be
-    /// chosen for login unless the manual login hint is set.
-    ///
-    /// # Returns
-    ///
-    /// #TRUE if the available users should not be shown.
     #[doc(alias = "lightdm_greeter_get_hide_users_hint")]
     #[doc(alias = "get_hide_users_hint")]
     #[doc(alias = "hide-users-hint")]
@@ -311,13 +129,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// Get a hint.
-    /// ## `name`
-    /// The hint name to query.
-    ///
-    /// # Returns
-    ///
-    /// The value for this hint or #NULL if not set.
     #[doc(alias = "lightdm_greeter_get_hint")]
     #[doc(alias = "get_hint")]
     fn hint(&self, name: &str) -> Option<glib::GString> {
@@ -329,11 +140,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// Checks if the greeter is in the process of authenticating.
-    ///
-    /// # Returns
-    ///
-    /// #TRUE if the greeter is authenticating a user.
     #[doc(alias = "lightdm_greeter_get_in_authentication")]
     #[doc(alias = "get_in_authentication")]
     #[doc(alias = "in-authentication")]
@@ -345,11 +151,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// Checks if the greeter has successfully authenticated.
-    ///
-    /// # Returns
-    ///
-    /// #TRUE if the greeter is authenticated for login.
     #[doc(alias = "lightdm_greeter_get_is_authenticated")]
     #[doc(alias = "get_is_authenticated")]
     #[doc(alias = "is-authenticated")]
@@ -361,11 +162,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// Check if the greeter is acting as a lock screen.
-    ///
-    /// # Returns
-    ///
-    /// #TRUE if the greeter was triggered by locking the seat.
     #[doc(alias = "lightdm_greeter_get_lock_hint")]
     #[doc(alias = "get_lock_hint")]
     #[doc(alias = "lock-hint")]
@@ -377,11 +173,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// Check if the guest account should be selected by default.
-    ///
-    /// # Returns
-    ///
-    /// #TRUE if the guest account should be selected by default.
     #[doc(alias = "lightdm_greeter_get_select_guest_hint")]
     #[doc(alias = "get_select_guest_hint")]
     #[doc(alias = "select-guest-hint")]
@@ -393,11 +184,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// Get the user to select by default.
-    ///
-    /// # Returns
-    ///
-    /// A username or [`None`] if no particular user should be selected.
     #[doc(alias = "lightdm_greeter_get_select_user_hint")]
     #[doc(alias = "get_select_user_hint")]
     #[doc(alias = "select-user-hint")]
@@ -409,14 +195,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// Check if a manual login option should be shown.  If set the GUI
-    /// should provide a way for a username to be entered manually.
-    /// Without this hint a greeter which is showing a user list can
-    /// limit logins to only those users.
-    ///
-    /// # Returns
-    ///
-    /// #TRUE if a manual login option should be shown.
     #[doc(alias = "lightdm_greeter_get_show_manual_login_hint")]
     #[doc(alias = "get_show_manual_login_hint")]
     #[doc(alias = "show-manual-login-hint")]
@@ -428,12 +206,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// Check if a remote login option should be shown.  If set the GUI
-    /// should provide a way for a user to log into a remote desktop server.
-    ///
-    /// # Returns
-    ///
-    /// #TRUE if a remote login option should be shown.
     #[doc(alias = "lightdm_greeter_get_show_remote_login_hint")]
     #[doc(alias = "get_show_remote_login_hint")]
     #[doc(alias = "show-remote-login-hint")]
@@ -445,10 +217,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// Set whether the greeter will be reset instead of killed after the user logs in.
-    /// This must be called before lightdm_greeter_connect is called.
-    /// ## `resettable`
-    /// Whether the greeter wants to be reset instead of killed after the user logs in
     #[doc(alias = "lightdm_greeter_set_resettable")]
     fn set_resettable(&self, resettable: bool) {
         unsafe {
@@ -459,11 +227,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// The ::authentication-complete signal gets emitted when the greeter
-    /// has completed authentication.
-    ///
-    /// Call lightdm_greeter_get_is_authenticated() to check if the authentication
-    /// was successful.
     #[doc(alias = "authentication-complete")]
     fn connect_authentication_complete<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe extern "C" fn authentication_complete_trampoline<
@@ -491,8 +254,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// The ::timed-login signal gets emitted when the automatic login timer has expired.
-    /// The application should then call lightdm_greeter_authenticate_autologin().
     #[doc(alias = "autologin-timer-expired")]
     fn connect_autologin_timer_expired<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe extern "C" fn autologin_timer_expired_trampoline<
@@ -520,11 +281,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// The ::idle signal gets emitted when the user has logged in and the
-    /// greeter is no longer needed.
-    ///
-    /// This signal only matters if the greeter has marked itself as
-    /// resettable using lightdm_greeter_set_resettable().
     #[doc(alias = "idle")]
     fn connect_idle<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe extern "C" fn idle_trampoline<P: IsA<Greeter>, F: Fn(&P) + 'static>(
@@ -549,11 +305,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// The ::reset signal gets emitted when the user is returning to a greeter
-    /// that was previously marked idle.
-    ///
-    /// This signal only matters if the greeter has marked itself as
-    /// resettable using lightdm_greeter_set_resettable().
     #[doc(alias = "reset")]
     fn connect_reset<F: Fn(&Self) + 'static>(&self, f: F) -> SignalHandlerId {
         unsafe extern "C" fn reset_trampoline<P: IsA<Greeter>, F: Fn(&P) + 'static>(
@@ -578,12 +329,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// The ::show-message signal gets emitted when the greeter
-    /// should show a message to the user.
-    /// ## `text`
-    /// Message text
-    /// ## `type_`
-    /// Message type
     #[doc(alias = "show-message")]
     fn connect_show_message<F: Fn(&Self, &str, MessageType) + 'static>(
         &self,
@@ -620,16 +365,6 @@ pub trait GreeterExt: IsA<Greeter> + 'static {
         }
     }
 
-    /// The ::show-prompt signal gets emitted when the greeter should show a
-    /// prompt to the user.  The given text should be displayed and an input
-    /// field for the user to provide a response.
-    ///
-    /// Call lightdm_greeter_respond() with the resultant input or
-    /// lightdm_greeter_cancel_authentication() to abort the authentication.
-    /// ## `text`
-    /// Prompt text
-    /// ## `type_`
-    /// Prompt type
     #[doc(alias = "show-prompt")]
     fn connect_show_prompt<F: Fn(&Self, &str, PromptType) + 'static>(
         &self,

@@ -1,0 +1,68 @@
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+name: docs
+
+jobs:
+  docs:
+    name: build
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/zaynchen/lightdm-rs/lightdm:latest
+    env:
+      RELEASES: |
+        v0.1=0.1
+      RUSTDOCFLAGS: --cfg docsrs
+      DOCS_RS: 1
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: recursive
+          set-safe-directory: true
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: nightly
+          components: rustfmt
+      - run: curl -LsSf https://astral.sh/uv/install.sh | env UV_UNMANAGED_INSTALL="/usr/bin" sh
+      - run: git config --global --add safe.directory /__w/lightdm-rs/lightdm-rs
+      - run: git submodule update --checkout
+      - run: cargo install rustdoc-stripper --root /usr
+      - run: uv run ./generator.py --embed-docs --yes ./
+      - run: |
+          git clone https://gitlab.gnome.org/World/Rust/gir-rustdoc/
+          uv add --script ./gir-rustdoc/gir-rustdoc.py requests
+      - run: eval $(uv run ./gir-rustdoc/gir-rustdoc.py pre-docs)
+      - run: cargo doc --no-deps -p lightdm -p lightdm-sys --all-features
+      - run: mv target/doc docs
+      - run: uv run ./gir-rustdoc/gir-rustdoc.py html-index
+      - run: |
+          mkdir -p public/git
+          cp -r docs public/git/docs
+      - run: |
+          mkdir -p public/stable/0.1
+          mv docs public/stable/0.1
+          ln -s 0.1 latest && mv latest public/stable/latest
+      - name: Upload static files as artifact
+        uses: actions/upload-pages-artifact@v4
+        id: deployment
+        with:
+          path: public
+
+  deploy:
+    needs: docs
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
