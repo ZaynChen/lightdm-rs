@@ -37,7 +37,7 @@ jobs:
           git clone https://gitlab.gnome.org/World/Rust/gir-rustdoc/
           uv add --script ./gir-rustdoc/gir-rustdoc.py requests
       - run: eval $(uv run ./gir-rustdoc/gir-rustdoc.py pre-docs)
-      - run: cargo doc --no-deps -p lightdm -p lightdm-sys --all-features
+      - run: cargo doc --no-deps -p lightdm -p lightdm-sys -p lightdm_client --all-features
       - run: mv target/doc docs
       - run: uv run ./gir-rustdoc/gir-rustdoc.py html-index
       - run: |

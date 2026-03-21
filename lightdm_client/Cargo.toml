@@ -1,0 +1,18 @@
+[package]
+name = "lightdm_client"
+version = "0.1.0"
+edition = "2024"
+description = "Pure Rust implementation for lightdm/greeter.h in liblightdm-gobject-1"
+repository.workspace = true
+license = "MIT"
+keywords.workspace = true
+categories.workspace = true
+
+[package.metadata.docs.rs]
+rustdoc-args = ["--generate-link-to-definition"]
+
+[dependencies]
+glib = "0.22"
+gio = "0.22"
+glib-unix = "0.22"
+log = "0.4"

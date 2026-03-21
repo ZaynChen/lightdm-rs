@@ -1,6 +1,6 @@
 [workspace]
 resolver = "3"
-members = ["examples", "lightdm", "lightdm/sys"]
+members = ["examples", "lightdm", "lightdm/sys", "lightdm_client"]
 
 exclude = ["gir"]
 
