@@ -3,6 +3,7 @@ name = "lightdm_client"
 version = "0.1.0"
 edition = "2024"
 description = "Pure Rust implementation for lightdm/greeter.h in liblightdm-gobject-1"
+documentation = "https://zaynchen.github.io/lightdm-rs/stable/latest/docs/lightdm_client/index.html"
 repository.workspace = true
 license = "MIT"
 keywords.workspace = true
